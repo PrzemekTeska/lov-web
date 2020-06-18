@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LOV</title>
+    <link href="../static/css/addgoalstyle.css" th:href="@{/css/addgoalstyle.css}" rel="stylesheet"/>
+
+</head>
+<body>
+
+<a th:href="@{/redirectToActivities}"><input type="button" value="Return" id="back-button"></a>
+
+<div id="wrapper">
+    <h3>Before adding <span th:text="${warning}"></span>, create an activity first!</h3>
+    <form th:action="@{|/saveactivityfail/${endpoint}|}" th:object="${activity}" method="post" onsubmit="return validation()">
+        <p class="label"><b>Choose activity name or write your own:</b></p>
+        <input id="activityDataTemplates" list="activitytemplates" name="activitytemplates" th:field="*{activityName}">
+        <datalist id="activitytemplates" >
+            <option value="Do pushups">Do pushups</option>
+            <option value="Read book">Read book</option>
+            <option value="Study">Study</option>
+            <option value="Go for a walk">Go for a walk</option>
+        </datalist>
+        <div id="left-box">
+            <p class="label"><b>Activity amount:</b></p>
+            <input type="number" min="1" value="1" max="1000000" id="activityamount" name="activityamount" th:field="*{activityAmount}"/>
+        </div>
+        <div id="right-box">
+            <p class="label"><b>Activity unit:</b></p>
+            <input id="activityDataList" list="activityList" name="activityList" th:field="*{activityUnit}">
+            <datalist id="activityList">
+                <option value="kilograms">
+                <option value="pages">
+                <option value="kilometres">
+                <option value="minutes">
+                <option value="hours">
+                <option value="repeats">
+            </datalist> </div>
+        <p>Please select frequency:</p>
+        <input type="radio" id="daily" name="frequency" value="daily" th:field="*{frequency}">
+        <label for="daily">Daily</label><br>
+        <input type="radio" id="weekly" name="frequency" value="weekly" th:field="*{frequency}">
+        <label for="weekly">Weekly</label><br>
+        <input type="radio" id="single_activity" name="frequency" value="single" th:field="*{frequency}">
+        <label for="weekly">Single activity</label><br>
+        <p class="label"><b>Activity points:</b></p>
+        <input type="number" min="1" value="1" max="5" id="activitypoints" name="activitypoints" th:field="*{activityPoints}"/> <br />
+        <p class="label"><b>Choose goal for your activity:</b></p>
+        <select id="availablegoals" th:field="*{activityGoal}">
+            <option value="-">-</option>
+            <option th:each="goal: ${goalList}" th:text="${goal.goalName}" th:value="${goal.id}"></option>
+        </select>
+        <input type="submit" value="Add" id="add-button"/><br /><br />
+    </form>
+</div>
+</body>
+
+
+<script>
+    function validation() {
+        var activityName=document.getElementById("activityDataTemplates").value;
+        var goalName=document.getElementById("availablegoals").value;
+        var activityUnit=document.getElementById("activityDataList").value;
+
+        if (goalName !== "-" && activityUnit !== "" && activityName !== "") {
+            return true;
+        }
+        alert("Invalid data!");
+        return false;
+    }
+</script>
+</html>

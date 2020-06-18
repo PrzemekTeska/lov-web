@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LOV</title>
+    <link href="../static/css/profilestyle.css" th:href="@{/css/profilestyle.css}" rel="stylesheet"/>
+
+</head>
+<body>
+<div class="topnav" id="myTopnav">
+    <a th:href="@{/redirectToMain}" >Home</a>
+    <a th:href="@{/goals}" >Goals</a>
+    <a th:href="@{/activities}">Activities</a>
+    <a th:href="@{/profile}" class="active">Profile</a>
+    <a th:href="@{/rewards}">Rewards</a>
+    <a th:href="@{/penalties}">Penalties</a>
+    <a th:href="@{/ranking}">Ranking</a>
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+    </a>
+    <div class="logout">
+        <a th:href="@{/logout}" id="logouta"><input type="button" id="logoutbutton" value="Logout"></a>
+    </div>
+    <div class="pointsbox">
+        <span class="points" >Points: </span>
+        <span class="points" th:text="${user.points}" ></span>
+    </div>
+</div>
+<div id="profile-wrapper">
+    <div id="profile-box">
+        <h1>Your Profile</h1>
+        <div id="left-box">
+            <p><b>Username: </b></p>
+            <p><b>E-mail: </b></p>
+            <p><b>Points: </b></p>
+        </div>
+        <div id="right-box">
+            <p th:text="${user.username}"></p>
+            <p th:text="${user.email}"></p>
+            <p th:text="${user.points}"></p>
+        </div>
+    </div>
+    <a th:href="@{/redirectToEditProfile}"><input type="button" value="Edit profile" id="edit-button"></a>
+</div>
+</body>
+</html>

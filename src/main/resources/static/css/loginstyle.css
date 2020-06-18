@@ -1,0 +1,101 @@
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: url("../images/lovbg.png") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+h1 {
+    font-family: helvetica, serif;
+    font-size: 40px;
+}
+
+#login-box{
+    background: white;
+    border-radius: 40px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    width: 1000px;
+    height: 600px;
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#login-wrapper{
+    text-align: center;
+    padding-top: 100px;
+}
+
+#logo-wrapper{
+    float:left;
+    width: 400px;
+    height: 560px;
+    margin-top: 20px;
+    border-right: 3px solid gray;
+    border-radius: 3px;
+}
+
+#logo{
+    width: 200px;
+    height: 200px;
+    margin-top: 40%;
+    margin-left: 25%;
+
+}
+
+#username{
+    width: 300px;
+    height: 50px;
+    border: none;
+    border-radius: 40px;
+    background: #CBCBCB;
+    padding-left: 20px;
+}
+
+#password{
+    width: 300px;
+    height: 50px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 40px;
+    background: #CBCBCB;
+    padding-left: 20px;
+
+}
+
+#login-button{
+    height: 50px;
+    width: 200px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 40px;
+    background: #50B3FF;
+    color: white;
+    font-size: 15px;
+    transition: 0.4s;
+}
+
+#login-button:hover{
+    width: 230px;
+    background: #2890E1;
+}
+
+p{
+    font-size: 15px;
+}
+
+#register-now{
+    color: #2890E1;
+}
+
+#wrongpass{
+    padding-top: 2px;
+    font-size: 11px;
+    color: red;
+}

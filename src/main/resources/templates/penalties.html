@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LOV</title>
+    <link href="../static/css/goalsstyle.css" th:href="@{/css/goalsstyle.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="topnav" id="myTopnav">
+    <a th:href="@{/redirectToMain}" >Home</a>
+    <a th:href="@{/goals}" >Goals</a>
+    <a th:href="@{/activities}">Activities</a>
+    <a th:href="@{/profile}">Profile</a>
+    <a th:href="@{/rewards}" >Rewards</a>
+    <a th:href="@{/penalties}" class="active">Penalties</a>
+    <a th:href="@{/ranking}">Ranking</a>
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+    </a>
+    <div class="logout">
+        <a th:href="@{/logout}" id="logouta"><input type="button" id="logoutbutton" value="Logout"></a>
+    </div>
+    <div class="pointsbox">
+        <span class="points" >Points: </span>
+        <span class="points" th:text="${user.points}" ></span>
+    </div>
+</div>
+
+<a th:href="@{/redirectToAddPenalty}"><input type="button" id="addgoal-button" value="Add new penalty"></a>
+
+<div class="wrapper">
+    <div class="goalsdiv">
+        <table>
+            <tr>
+                <th>Penalty</th>
+                <th>Failed in a row</th>
+                <th>Failed in a row Limit</th>
+                <th>Goal</th>
+            </tr>
+            <tr th:each="penalty: ${penaltyList}">
+                <td th:text="${penalty.contents}" />
+                <td th:text="${penalty.failedInARow}" />
+                <td th:text="${penalty.failedInARowLimit}" />
+                <td th:text="${penalty.goal.goalName}" />
+                <td>
+                    <a th:href="@{/penalties/delete/{id}(id=${penalty.id})}" onclick="return deleteConfirmation()">
+                        <input type="button" value="Delete" id="delete-button" >
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{/editpenalty/{id}(id=${penalty.id})}">
+                        <input type="button" value="Edit" id="edit-button" >
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="wrapper">
+    <div class="activegoalsdiv">
+        <table id="penaltyTable" th:if="${checkActivePenalties==true}" >
+            <tr>
+                <th>Penalty</th>
+                <th>Failed in a row</th>
+                <th>Failed in a row Limit</th>
+            </tr>
+            <tr th:each="penalty: ${activePenaltyList}">
+                <td th:text="${penalty.contents}" />
+                <td th:text="${penalty.failedInARow}" />
+                <td th:text="${penalty.failedInARowLimit}" />
+                <td>
+                    <a th:href="@{/penalties/delete/{id}(id=${penalty.id})}" onclick="return deleteConfirmation()">
+                        <input type="button" value="Done" id="delete-button1" >
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+<script>
+    function deleteConfirmation() {
+        return window.confirm("Are you sure you want to delete this penalty?");
+    }
+
+    function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
+    }
+</script>
+</body>
+</html>

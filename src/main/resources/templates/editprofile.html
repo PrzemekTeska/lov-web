@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LOV</title>
+    <link href="../static/css/editprofilestyle.css" th:href="@{/css/editprofilestyle.css}" rel="stylesheet"/>
+</head>
+<body>
+<div id="login-box">
+    <div id="login-wrapper">
+        <h1>Profile Edition</h1>
+        <form th:action="@{/updateprofile}" th:object="${user}" method="post" onsubmit="return dataValidation()">
+            <input type="text" id="username" name="username" placeholder="Username" th:field="*{username}"/> <br />
+            <span class="text">Username must contain 3-15 characters!</span><br />
+            <input type="password" id="password" class="password" name="password" placeholder="Password" th:field="*{password}"/> <br />
+            <input type="password"  id="repeatpassword" class="password" name="repeatpassword" placeholder="Repeat password"  th:field="*{passwordRepeat}"/> <br />
+            <span class="text">Password must contain between 9 to 20 characters, at least one numeric digit,<br /> one uppercase, one lowercase letter and special sign!</span><br />
+            <span class="text">After changing your credentials, you will have to sign in again.</span><br />
+            <p>Select notifications frequency:</p>
+            <div id="notifications" >
+            <input type="radio" id="disabled" name="notificationFrequency" value="disabled" th:field="*{notificationFrequency}">
+            <label for="disabled">Disabled</label><br>
+            <input type="radio" id="weekly" name="notificationFrequency" value="weekly" th:field="*{notificationFrequency}">
+            <label for="weekly">Weekly</label><br>
+            <input type="radio" id="oetw" name="notificationFrequency" value="oetw" th:field="*{notificationFrequency}">
+            <label for="oetw">Once every two weeks</label><br>
+            <input type="radio" id="oam" name="notificationFrequency" value="monthly" th:field="*{notificationFrequency}">
+            <label for="oam">Once a month</label><br>
+            </div>
+            <input type="submit" value="Apply" id="edit-button"/>
+            <a th:href="@{/redirectToProfile}"><input type="button" value="Return" id="back-button"></a>
+        </form>
+    </div>
+</div>
+
+
+<script>
+    function dataValidation() {
+        var password=document.getElementById("password").value;
+        var repeatpassword=document.getElementById("repeatpassword").value;
+        var user= document.getElementById("username").value;
+        var patternPassword="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=])(?=\\S+$).{9,20}$";
+        var patternUsername="^(?=\\S+$).{3,15}$";
+        if (password!=="" && repeatpassword!=="" && user!=="" && password.match(patternPassword) && password===repeatpassword
+            && user.match(patternUsername)) {
+            return true;
+        }
+        alert("Invalid data!");
+        return false;
+    }
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Verification</title>
+    <link href="../static/css/loginstyle.css" th:href="@{/css/loginstyle.css}" rel="stylesheet"/>
+</head>
+<body>
+<div id="login-box">
+    <div id="logo-wrapper">
+        <img id="logo" src="../static/images/lovlogo.png" th:src="@{/images/lovlogo.png}" alt="lovlogo">
+    </div>
+    <div id="login-wrapper">
+        <h1>Thank you for signing up!</h1>
+        <p>Verification link has been sent to <b><p th:text="${email}"></p></b>Activate your account and login!</p>
+        <p>Have you activated your account? <a th:href="@{/redirectToLogin}" id="login-now"><b>LOGIN NOW</b></a></p>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LOV</title>
+    <link href="../static/css/addgoalstyle.css" th:href="@{/css/addgoalstyle.css}" rel="stylesheet"/>
+
+</head>
+<body>
+
+<a th:href="@{/redirectToRewards}"><input type="button" value="Return" id="back-button"></a>
+
+<div id="wrapper">
+    <h1>Edit your reward!</h1>
+    <form th:action="@{/rewards/editreward/{id}(id=${reward.id})}" th:object="${reward}" method="post" onsubmit="return dataValidation()">
+        <p class="label"><b>Choose reward:</b></p>
+        <select id="rewardtemplates" onchange="myFunction(this)">
+            <option value="-">-</option>
+            <option value="Play video games">Play video games</option>
+            <option value="Cheat meal">Cheat meal</option>
+            <option value="Free day">Free day</option>
+        </select>
+        <p class="label"><b>or create your own:</b></p>
+        <input type="text" id="rewardcontents" name="rewardcontents" th:field="*{contents}"/> <br />
+        <p class="label"><b>Set a minimal percentage of succeeded activities for this reward to activate:</b></p>
+        <input type="number" min="50" value="50" max="100" id="rawardpercentage" name="rawardpercentage" th:field="*{percentageLimit}"/> <br />
+        <p class="label"><b>Choose goal for your reward:</b></p>
+        <select id="availablegoals" th:field="*{goal}">
+            <option th:each="goal: ${goalList}" th:text="${goal.goalName}" th:value="${goal.id}"></option>
+        </select>
+        <input type="submit" value="Apply" id="add-button"/><br /><br />
+    </form>
+</div>
+</body>
+
+
+<script>
+    function dataValidation() {
+        var rewardcontents=document.getElementById("rewardcontents").value;
+        if (rewardcontents !== "") {
+            return true;
+        }
+        alert("Invalid data!");
+        return false;
+    }
+
+    function myFunction(data) {
+        document.getElementById("rewardcontents").value=data.value;
+    }
+</script>
+</html>

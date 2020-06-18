@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LOV</title>
+    <link href="../static/css/addgoalstyle.css" th:href="@{/css/addgoalstyle.css}" rel="stylesheet"/>
+
+</head>
+<body>
+
+<a th:href="@{/redirectToGoals}"><input type="button" value="Return" id="back-button"></a>
+
+<div id="wrapper">
+    <h3>Before adding <span th:text="${warning}"></span>, create a goal first!</h3>
+    <form th:action="@{|/savegoalnoactivity/${endpoint}|}" th:object="${goal}" method="post" onsubmit="return dateValidation()">        <p class="label"><b>Choose goal name:</b></p>
+        <select id="goaltemplates" onchange="myFunction(this)">
+            <option value="-">-</option>
+            <option value="Get better shape">Get better shape</option>
+            <option value="Get better grades">Get better grades</option>
+            <option value="Develop in my hobby">Develop in my hobby</option>
+            <option value="Read more books">Read more books</option>
+        </select>
+        <p class="label"><b>or create your own:</b></p>
+        <input type="text" id="goalname" name="goalname" th:field="*{goalName}"/> <br />
+        <p class="label"><b>Goal start date:</b></p>
+        <input type="date" id="startdate" name="startdate" th:field="*{goalStartDate}"/><br />
+        <p class="label"><b>Goal end date:</b></p>
+        <input type="date" id="enddate" name="enddate" th:field="*{goalEndDate}"/><br /><br />
+        <input type="submit" value="Add" id="add-button"/><br /><br />
+    </form>
+</div>
+</body>
+
+
+<script>
+    function dateValidation() {
+        let startDate=new Date(document.getElementById("startdate").value);
+        let endDate=new Date(document.getElementById("enddate").value);
+        var goalName=document.getElementById("goalname").value;
+        var today = new Date(Date.now());
+        today.setDate(today.getDate()-1);
+        if (goalName !== "" && startDate < endDate && startDate !== endDate && endDate > today && startDate > today && endDate !== today) {
+            return true;
+        }
+        alert("Invalid data!")
+        return false;
+    }
+
+    function myFunction(data) {
+        document.getElementById("goalname").value=data.value;
+    }
+
+</script>
+</html>

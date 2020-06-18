@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LOV</title>
+    <link href="../static/css/goalsstyle.css" th:href="@{/css/goalsstyle.css}" rel="stylesheet"/>
+
+</head>
+<body>
+<div class="wrapper">
+    <div class="goalsdiv">
+        <table>
+            <tr>
+                <th>Goal Name</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+            </tr>
+            <tr th:each="goal: ${goalList}">
+                <td th:text="${goal.goalName}" />
+                <td th:text="${#temporals.format(goal.goalStartDate, 'dd.MM.yyyy')}" />
+                <td th:text="${#temporals.format(goal.goalEndDate, 'dd.MM.yyyy')}" />
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+<script>
+
+    function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LOV</title>
+    <link href="../static/css/addgoalstyle.css" th:href="@{/css/addgoalstyle.css}" rel="stylesheet"/>
+
+</head>
+<body>
+
+<a th:href="@{/redirectToPenalties}"><input type="button" value="Return" id="back-button"></a>
+
+<div id="wrapper">
+    <h1>Create new penalty!</h1>
+    <form th:action="@{/savepenalty}" th:object="${penalty}" method="post" onsubmit="return dataValidation()">
+        <p class="label"><b>Choose penalty:</b></p>
+        <select id="penaltytemplates" onchange="myFunction(this)">
+            <option value="-">-</option>
+            <option value="Additional excersise">Additional excersise</option>
+            <option value="Do the dishes">Do the dishes</option>
+            <option value="Stay home and study">Stay home and study</option>
+        </select>
+        <p class="label"><b>or create your own:</b></p>
+        <input type="text" id="penaltycontents" name="penaltycontents" th:field="*{contents}"/> <br />
+        <p class="label"><b>Set a minimal amount of failed in a row activities for this penalty to activate:</b></p>
+        <input type="number" min="1" value="5" max="10" id="penaltyfailedinarow" name="penaltyfailedinarow" th:field="*{failedInARowLimit}"/> <br />
+        <p class="label"><b>Choose goal for your penalty:</b></p>
+        <select id="availablegoals" th:field="*{goal}">
+            <option value="-">-</option>
+            <option th:each="goal: ${goalList}" th:text="${goal.goalName}" th:value="${goal.id}"></option>
+        </select>
+        <input type="submit" value="Add" id="add-button"/><br /><br />
+    </form>
+</div>
+</body>
+
+
+<script>
+    function dataValidation() {
+        var penaltycontents=document.getElementById("penaltycontents").value;
+        var goalName=document.getElementById("availablegoals").value;
+        if (penaltycontents !== "" && goalName !== "-") {
+            return true;
+        }
+        alert("Invalid data!");
+        return false;
+    }
+
+    function myFunction(data) {
+        document.getElementById("penaltycontents").value=data.value;
+    }
+</script>
+</html>

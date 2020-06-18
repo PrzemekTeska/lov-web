@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LOV</title>
+    <link href="../static/css/goalsstyle.css" th:href="@{/css/goalsstyle.css}" rel="stylesheet"/>
+
+</head>
+<body>
+<div class="topnav" id="myTopnav">
+    <a th:href="@{/redirectToMain}" >Home</a>
+    <a th:href="@{/goals}">Goals</a>
+    <a th:href="@{/activities}" class="active">Activities</a>
+    <a th:href="@{/profile}">Profile</a>
+    <a th:href="@{/rewards}">Rewards</a>
+    <a th:href="@{/penalties}">Penalties</a>
+    <a th:href="@{/ranking}">Ranking</a>
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+    </a>
+    <div class="logout">
+        <a th:href="@{/logout}" id="logouta"><input type="button" id="logoutbutton" value="Logout"></a>
+    </div>
+    <div class="pointsbox">
+        <span class="points" >Points: </span>
+        <span class="points" th:text="${user.points}"></span>
+    </div>
+</div>
+
+
+<a th:href="@{/redirectToAddActivity}"><input type="button" id="addgoal-button" value="Add new activity"></a>
+
+<div class="wrapper">
+    <div class="goalsdiv">
+        <table>
+            <tr>
+                <th></th>
+                <th></th>
+                <th>Progress</th>
+                <th>Activity Name</th>
+                <th>Activity Amount</th>
+                <th>Activity Unit</th>
+                <th>Activity Points</th>
+                <th>Activity Goal</th>
+            </tr>
+            <tr th:each="activity: ${activityList}">
+                <td>
+                <a th:href="@{/activities/deleteCompleted/{id}(id=${activity.id})}" onclick="">
+                <input type="button" value="Completed" id="completed-button" >
+                </a>
+                </td>
+                <td>
+                    <a th:href="@{/activities/deleteFailed/{id}(id=${activity.id})}" onclick="">
+                        <input type="button" value="Failed" id="failed-button" >
+                    </a>
+                </td>
+                <td th:text="${activity.counterString}" />
+                <td th:text="${activity.activityName}" />
+                <td th:text="${activity.activityAmount}" />
+                <td th:text="${activity.activityUnit}" />
+                <td th:text="${activity.activityPoints}" />
+                <td th:text="${activity.activityGoal.goalName}" />
+                <td>
+                    <a th:href="@{/activities/delete/{id}(id=${activity.id})}" onclick="return deleteConfirmation()">
+                        <input type="button" value="Delete" id="delete-button" >
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{/editactivity/{id}(id=${activity.id})}">
+                        <input type="button" value="Edit" id="edit-button" >
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+<script>
+    function deleteConfirmation() {
+        return window.confirm("Are you sure you want to delete this Activity?");
+    }
+    function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
+    }
+</script>
+</body>
+</html>

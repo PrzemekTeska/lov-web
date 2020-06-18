@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LOV</title>
+    <link href="../static/css/rankingstyle.css" th:href="@{/css/rankingstyle.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="topnav" id="myTopnav">
+    <a th:href="@{/redirectToMain}" class="active">Home</a>
+    <a th:href="@{/redirectToGoals}">Goals</a>
+    <a th:href="@{/activities}">Activities</a>
+    <a th:href="@{/profile}">Profile</a>
+    <a th:href="@{/rewards}">Rewards</a>
+    <a th:href="@{/penalties}">Penalties</a>
+    <a th:href="@{/ranking}">Ranking</a>
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+    </a>
+
+    <div class="logout">
+        <a th:href="@{/redirectToLogout}" id="logouta"><input type="button" id="logoutbutton" value="Logout"></a>
+    </div>
+    <div class="pointsbox">
+        <span class="points" >Points: </span>
+        <span class="points" th:text="${user.points}" ></span>
+    </div>
+</div>
+<div class="wrapper">
+    <div class="goalsdiv">
+        <table>
+            <tr>
+                <th>Rank</th>
+                <th>Username</th>
+                <th>Points</th>
+            </tr>
+            <tr class="current-user-ranking">
+                <td th:text="${currentUserRank}"></td>
+                <td th:text="${user.username}"></td>
+                <td th:text="${user.points}"></td>
+
+            </tr>
+            <tr th:each="user: ${rankingList}" th:if="${userStat.index}<10">
+                <td th:text="${userStat.count}"></td>
+                <td th:text="${user.username}"></td>
+                <td th:text="${user.points}"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script>
+    function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
+    }
+</script>
+</body>
+</html>

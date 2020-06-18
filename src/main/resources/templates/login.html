@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link href="../static/css/loginstyle.css" th:href="@{/css/loginstyle.css}" rel="stylesheet"/>
+</head>
+<body>
+
+<div id="login-box">
+    <div id="logo-wrapper">
+        <img id="logo" src="../static/images/lovlogo.png" th:src="@{/images/lovlogo.png}" alt="lovlogo">
+    </div>
+    <div id="login-wrapper">
+    <h1>Welcome to LOV!</h1>
+<form th:action="@{/login}" method="post">
+    <input type="text" id="username" name="username" placeholder="Username"/> <br />
+    <input type="password" id="password" name="password" placeholder="Password"/> <br />
+    <input type="submit" value="Login" id="login-button" />
+    <br />
+    <br />
+    <p>You don't have an account? <a th:href="@{/redirectToSignUp}" id="register-now"><b>REGISTER NOW</b></a></p>
+</form>
+    </div>
+</div>
+</body>
+</html>

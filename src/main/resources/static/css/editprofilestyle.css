@@ -1,0 +1,129 @@
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: url("../images/lovbg.png") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+}
+
+h1 {
+    font-family: helvetica, serif;
+    font-size: 30px;
+}
+
+#login-box{
+    background: white;
+    border-radius: 40px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    width: 460px;
+    height: 630px;
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#notifications{
+    text-align: left;
+    margin-left: 140px;
+}
+
+#login-wrapper{
+    text-align: center;
+    padding-top: 10px;
+}
+
+#logo-wrapper{
+    float:left;
+    width: 400px;
+    height: 560px;
+    margin-top: 20px;
+    border-right: 3px solid gray;
+    border-radius: 3px;
+}
+
+#wrongpass{
+    padding-top: 2px;
+    font-size: 11px;
+    color: red;
+}
+
+#logo{
+    width: 200px;
+    height: 200px;
+    margin-top: 40%;
+    margin-left: 25%;
+
+}
+
+#username{
+    width: 300px;
+    height: 50px;
+    border: none;
+    border-radius: 40px;
+    background: #CBCBCB;
+    padding-left: 20px;
+}
+
+
+.password{
+    width: 300px;
+    height: 50px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 40px;
+    background: #CBCBCB;
+    padding-left: 20px;
+
+}
+
+#edit-button{
+    height: 50px;
+    width: 120px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 40px;
+    background: #50B3FF;
+    color: white;
+    font-size: 15px;
+    transition: 0.4s;
+}
+
+#back-button{
+    height: 50px;
+    width: 120px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 40px;
+    background: gray;
+    color: white;
+    font-size: 15px;
+    transition: 0.4s;
+}
+
+#edit-button:hover{
+    width: 170px;
+    background: #2890E1;
+}
+
+#back-button:hover{
+    width: 170px;
+    background: #b5b5b5;
+}
+p{
+    font-size: 15px;
+}
+
+#login-now{
+    color: #2890E1;
+}
+
+.text{
+    font-size: 10px;
+    color: gray;
+}

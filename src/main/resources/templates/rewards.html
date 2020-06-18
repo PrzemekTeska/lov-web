@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LOV</title>
+    <link href="../static/css/goalsstyle.css" th:href="@{/css/goalsstyle.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="topnav" id="myTopnav">
+    <a th:href="@{/redirectToMain}" >Home</a>
+    <a th:href="@{/goals}" >Goals</a>
+    <a th:href="@{/activities}">Activities</a>
+    <a th:href="@{/profile}">Profile</a>
+    <a th:href="@{/rewards}" class="active">Rewards</a>
+    <a th:href="@{/penalties}">Penalties</a>
+    <a th:href="@{/ranking}">Ranking</a>
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+    </a>
+    <div class="logout">
+        <a th:href="@{/logout}" id="logouta"><input type="button" id="logoutbutton" value="Logout"></a>
+    </div>
+    <div class="pointsbox">
+        <span class="points" >Points: </span>
+        <span class="points" th:text="${user.points}" ></span>
+    </div>
+</div>
+
+<a th:href="@{/redirectToAddReward}"><input type="button" id="addgoal-button" value="Add new reward"></a>
+
+<div class="wrapper">
+    <div class="goalsdiv">
+        <table>
+            <tr>
+                <th>Reward</th>
+                <th>Actual Percentage</th>
+                <th>Percentage Limit</th>
+                <th>Goal</th>
+            </tr>
+            <tr th:each="reward: ${rewardList}">
+                <td th:text="${reward.contents}" />
+                <td th:text="${reward.percentage}" />
+                <td th:text="${reward.percentageLimit}" />
+                <td th:text="${reward.goal.goalName}" />
+                <td>
+                    <a th:href="@{/rewards/delete/{id}(id=${reward.id})}" onclick="return deleteConfirmation()">
+                        <input type="button" value="Delete" id="delete-button" >
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{/editreward/{id}(id=${reward.id})}">
+                        <input type="button" value="Edit" id="edit-button" >
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="wrapper">
+    <div class="activegoalsdiv">
+        <table id="rewardsTable"  th:if="${checkActiveRewards==true}">
+            <tr>
+                <th>Active Reward</th>
+                <th>Actual Percentage</th>
+                <th>Percentage Limit</th>
+            </tr>
+            <tr th:each="reward: ${activeRewardList}">
+                <td th:text="${reward.contents}" />
+                <td th:text="${reward.percentage}" />
+                <td th:text="${reward.percentageLimit}"/>
+                <td>
+                    <a th:href="@{/rewards/delete/{id}(id=${reward.id})}" onclick="return deleteConfirmation()">
+                        <input type="button" value="Done" id="delete-button1" >
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+<script>
+
+    function deleteConfirmation() {
+        return window.confirm("Are you sure you want to delete this reward?");
+    }
+
+    function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
+    }
+</script>
+</body>
+</html>
